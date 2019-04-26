@@ -7,6 +7,7 @@ import { Route, Switch } from 'react-router-dom'
 import thunk from 'redux-thunk'
 import reducers from './reducers'
 import Questions from './components/Questions'
+import Rewards from './components/Rewards'
 import './App.css'
 
 const history = createBrowserHistory()
@@ -28,7 +29,8 @@ const App = () => (
     <Provider store={store}>
       <ConnectedRouter history={history}>
         <Switch>
-          <Route path='/' component={Questions} />
+          <Route  exact path='/' component={Questions} />
+          <Route  path='/rewards' component={Rewards} />
         </Switch>
       </ConnectedRouter>
     </Provider>
