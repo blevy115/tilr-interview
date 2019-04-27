@@ -13,6 +13,10 @@ class QuestionsForm extends Component {
     this.props.createQuestion(this.state.question, this.state.tag)
   }
 
+  isDisabled(){
+    return !(this.state.question && this.state.tag)
+  }
+
   render() {
     const { question } = this.state.question
     const {tag } = this.state.tag
@@ -33,7 +37,7 @@ class QuestionsForm extends Component {
         />
         <button
           className='btn btn-primary'
-          disabled={question === ''}
+          disabled={this.isDisabled()}
           type='submit'
         >
           Create
