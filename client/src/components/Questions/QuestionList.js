@@ -1,10 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchQuestions } from '../../actions/questions'
+import Rewards from '../Rewards'
 
 class QuestionList extends Component {
   componentDidMount() {
     this.props.fetchQuestions()
+  }
+
+  answerQuestion(question, bool){
+    
   }
 
   render() {
@@ -18,6 +23,7 @@ class QuestionList extends Component {
               <div className='card-body'>
                 <button className='btn btn-success' style={{ marginRight: 10 }}>Yes</button>
                 <button className='btn btn-danger'>No</button>
+                <Rewards question_tag={question.tag}/>
               </div>
             </div>
           </div>

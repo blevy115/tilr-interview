@@ -10,10 +10,9 @@ class RewardsGif extends Component {
   }
 
   componentDidMount (){
-    fetch(`http://api.giphy.com/v1/gifs/search?q=${this.props.question_tag}&api_key=${process.env.REACT_APP_GIPHY_KEY}&limit=1`)
+    fetch(`http://api.giphy.com/v1/gifs/search?q=${this.props.question_tag}&api_key=${process.env.REACT_APP_GIPHY_KEY}&limit=10`)
     .then(response => response.json())
     .then(data => this.setState({tag:data,loaded:true}))
-    .then(()=> console.log(this.state))
   }
 
   render() {
@@ -21,7 +20,7 @@ class RewardsGif extends Component {
 
     return (
       <div className = 'rewards_gif'>
-        <img src={this.state.tag.data[0].images.original.url}/>
+        <img src={this.state.tag.data[Math.floor(Math.random()*10)].images.original.url}/>
       </div>
     )
   }

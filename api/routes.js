@@ -13,13 +13,18 @@ router.get('/questions', async (req, res) => {
 })
 
 router.post('/questions', async (req, res) => {
-  const { text } = req.body
+  const text = req.body.text;
+  const tag= req.body.tag;
   try {
-    const question = await knex('questions').insert({ text }, '*')
+    const question = await knex('questions').insert({ text, tag }, '*')
     res.json(question)
   } catch (err) {
     res.status(text ? 500 : 400)
   }
+})
+
+router.post('/answers', async (req, res) => {
+  debugger
 })
 
 module.exports = router
