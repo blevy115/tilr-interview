@@ -1,18 +1,31 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchQuestions } from '../../actions/questions'
+import { fetchQuestions, createAnswer, fetchAnswers } from '../../actions/questions'
 import Rewards from '../Rewards'
 
 class QuestionList extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      user_id:1 // testing purpsoes
+    }
+  }
+
   componentDidMount() {
     this.props.fetchQuestions()
+    this.props.fetchAnswers(this.state.user_id)
   }
 
-  answerQuestion(question, bool){
-    
+  answerQuestion(question_id, is_yes, callback) {
+    this.props.createAnswer(this.state.user_id, question_id, is_yes)
+    .then(res => {
+      this.props.fetchAnswers(this.state.user_id)
+    })
   }
+
 
   render() {
+    console.log(this);
     return (
       <div className='question-list'>
         <h3>Recently Added</h3>
@@ -21,9 +34,11 @@ class QuestionList extends Component {
             <div className='card-body'>
               <h5 className='card-title'>{question.text}</h5>
               <div className='card-body'>
-                <button className='btn btn-success' style={{ marginRight: 10 }}>Yes</button>
-                <button className='btn btn-danger'>No</button>
-                <Rewards question_tag={question.tag}/>
+                <button className='btn btn-success' style={{ marginRight: 10 }} onClick={() => this.answerQuestion(question.question_id, true, this.props.fetchAnswers(this.state.user_id))}>Yes</button>
+                <button className='btn btn-danger' onClick={() => this.answerQuestion(question.question_id, false, this.props.fetchAnswers(this.state.user_id))}>No</button>
+                { this.props.answers.includes(question.question_id) &&
+                  <Rewards  question_tag={question.tag}/>
+                }
               </div>
             </div>
           </div>
@@ -33,12 +48,13 @@ class QuestionList extends Component {
   }
 }
 
-const mapStateToProps = ({ questions }) => ({
-  questions: questions.all
+const mapStateToProps = ({ questions, answers }) => ({
+  questions: questions.all,
+  answers: answers.all.map(answer => answer.question_id)
 })
 
 const mapDispatchToProps = {
-  fetchQuestions
+  fetchQuestions, createAnswer, fetchAnswers
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestionList)

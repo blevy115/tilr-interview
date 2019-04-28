@@ -10,10 +10,7 @@ class Rewards extends Component {
   render() {
     return (
       <div className='rewards'>
-      <div className='rewards__sticky'>
-      <h1 className='text-center'>Rewards</h1>
-      </div>
-      <RewardsGif question_tag ={this.props.question_tag}/>
+        <RewardsGif question_tag ={this.props.question_tag}/>
       </div>
 
     )
