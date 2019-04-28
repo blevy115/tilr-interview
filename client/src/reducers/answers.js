@@ -6,9 +6,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.QUESTIONS_FETCH_ALL:
-      return { ...state, all: action.payload }
-    case actionTypes.USERS_FETCH_ALL:
+    case actionTypes.ANSWERS_FETCH:
       return { ...state, all: action.payload }
     default:
       return state
