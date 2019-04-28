@@ -21,10 +21,42 @@ export const createQuestion = (text, tag) => async (dispatch) => {
   }
 }
 
-export const answerQuestion = bool => async (dispatch) => {
+export const createAnswer = (user_id, question_id, is_yes) => async (dispatch) => {
   try {
-    const { data } = await axios.post('/answers', {})
+    const { data } = await axios.post('/answers', {user_id, question_id, is_yes})
+    dispatch({type:actionTypes.ANSWERS_CREATE, payload:data})
+    dispatch(push('/'))
   } catch (err) {
     console.log(err);
+  }
+}
+
+export const fetchAnswers = user_id => async (dispatch) => {
+  try {
+    const { data } = await axios.get('/answers', {params:{'user_id':user_id}})
+    dispatch({type:actionTypes.ANSWERS_FETCH, payload:data})
+    dispatch(push('/'))
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export const createUser = (name, password) => async (dispatch) => {
+  try{
+    const { data } = await axios.post('/users', {name, password})
+    console.log(data);
+    dispatch({type:actionTypes.USERS_CREATE, payload: data })
+    dispatch(push('/'))
+  } catch(err) {
+    console.log(err);
+  }
+}
+
+export const fetchUsers = () => async (dispatch) => {
+  try {
+    const { data } = await axios.get('/users')
+    dispatch({ type: actionTypes.USERS_FETCH_ALL, payload: data.reverse() })
+  } catch (err) {
+    console.log(err)
   }
 }
