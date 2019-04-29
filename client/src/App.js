@@ -7,7 +7,6 @@ import { Route, Switch } from 'react-router-dom'
 import thunk from 'redux-thunk'
 import reducers from './reducers'
 import Questions from './components/Questions'
-import Rewards from './components/Rewards'
 import Login from './components/Login'
 import './App.css'
 
