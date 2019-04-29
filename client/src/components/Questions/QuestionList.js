@@ -16,16 +16,14 @@ class QuestionList extends Component {
     this.props.fetchAnswers(this.state.user_id)
   }
 
-  answerQuestion(question_id, is_yes, callback) {
+  answerQuestion(question_id, is_yes) {
     this.props.createAnswer(this.state.user_id, question_id, is_yes)
     .then(res => {
       this.props.fetchAnswers(this.state.user_id)
     })
   }
 
-
   render() {
-    console.log(this);
     return (
       <div className='question-list'>
         <h3>Recently Added</h3>
@@ -34,10 +32,14 @@ class QuestionList extends Component {
             <div className='card-body'>
               <h5 className='card-title'>{question.text}</h5>
               <div className='card-body'>
-                <button className='btn btn-success' style={{ marginRight: 10 }} onClick={() => this.answerQuestion(question.question_id, true, this.props.fetchAnswers(this.state.user_id))}>Yes</button>
-                <button className='btn btn-danger' onClick={() => this.answerQuestion(question.question_id, false, this.props.fetchAnswers(this.state.user_id))}>No</button>
+                <button className='btn btn-success' style={{ marginRight: 10 }} onClick={() => this.answerQuestion(question.question_id, true, this.props.fetchAnswers(this.state.user_id))}
+                disabled={this.props.answers.includes(question.question_id)}>Yes</button>
+                <button className='btn btn-danger' onClick={() => this.answerQuestion(question.question_id, false)}
+                disabled={this.props.answers.includes(question.question_id)}>No</button>
                 { this.props.answers.includes(question.question_id) &&
-                  <Rewards  question_tag={question.tag}/>
+                  <div>
+                  <Rewards  question_tag={question.tag} question_id={question.question_id}/>
+                  </div>
                 }
               </div>
             </div>
@@ -48,9 +50,9 @@ class QuestionList extends Component {
   }
 }
 
-const mapStateToProps = ({ questions, answers }) => ({
+const mapStateToProps = ({ questions, answers, results }) => ({
   questions: questions.all,
-  answers: answers.all.map(answer => answer.question_id)
+  answers: answers.all.map(answer => answer.question_id),
 })
 
 const mapDispatchToProps = {
