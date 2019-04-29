@@ -1,4 +1,6 @@
-import React , { Component }from 'react'
+import React , {Component} from 'react'
+import {NavLink} from 'react-router-dom'
+
 import { connect } from 'react-redux'
 import { createUser } from '../../actions/questions'
 import './style.css'
@@ -27,6 +29,12 @@ class Login extends Component {
     const{password} = this.state.password
     return (
       <div>
+      <h1 className='text-center'>Sign Up</h1>
+      <ul className='nav nav-pills questions__nav'>
+        <li className='nav-item'><NavLink to='/' className='nav-link' exact>Home</NavLink></li>
+        <li className='nav-item'><NavLink to='/create' className='nav-link'>Create</NavLink></li>
+        <li className='nav-item'><NavLink to='/login' className='nav-link'>Sign Up</NavLink></li>
+      </ul>
       <form onSubmit={event => this.handelSubmit(event)} className='user-form'>
         <h3>Create a User</h3>
         <input
