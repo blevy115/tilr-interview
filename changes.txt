@@ -1,0 +1,6 @@
+Added  create user page at '/Login'
+Added tag section to questions which is used to Grab A relevant gif
+USed Giphy API to grab a random gif using the question tag, to do so you mussed create a .env file ub the src directory inside add the line REACT_APP_GIPHY_KEY = "Your giphy api code"
+Gif will only show up once question has been answered
+User can only answer question once
+Message appears showing the percent of people who chose Yes
