@@ -60,3 +60,13 @@ export const fetchUsers = () => async (dispatch) => {
     console.log(err)
   }
 }
+//
+export const fetchQuestionAnswers = question_id => async (dispatch) => {
+  try {
+    const {data} = await axios.get('/question/answers', {params:{'question_id':question_id}})
+    dispatch({type:actionTypes.QUESTION_FETCH_ANSWERS, payload: data })
+    dispatch(push('/'))
+  } catch (err){
+    console.log(err);
+  }
+}
