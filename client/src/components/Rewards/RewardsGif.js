@@ -28,7 +28,7 @@ class RewardsGif extends Component {
     return (
       <div className = 'rewards_gif'>
         <img src={this.state.tag.data[Math.floor(Math.random()*10)].images.fixed_height.url} alt={this.state.tag.data[Math.floor(Math.random()*10)].images.fixed_height.url}/>
-        <h1 className='card-result'>{(parseInt(this.state.results.filter((result) => result === true).length) / parseInt(this.state.results.length)  * 100).toFixed()} % of people Agree</h1>
+        <h1 className='card-result'>{(parseInt(this.state.results.filter((result) => result === true).length) / parseInt(this.state.results.length)  * 100).toFixed()} % of people say Yes</h1>
       </div>
     )
   }
