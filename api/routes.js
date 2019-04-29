@@ -69,9 +69,7 @@ router.get('/question/answers', async (req, res) => {
   const question_id = req.query.question_id
   try {
     const answers = await knex.select().table('answers').where({question_id})
-    console.log(answers);
     res.json(answers)
-    console.log('hello');
   } catch(err) {
     console.log(err);
   }

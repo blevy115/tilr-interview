@@ -44,7 +44,6 @@ export const fetchAnswers = user_id => async (dispatch) => {
 export const createUser = (name, password) => async (dispatch) => {
   try{
     const { data } = await axios.post('/users', {name, password})
-    console.log(data);
     dispatch({type:actionTypes.USERS_CREATE, payload: data })
     dispatch(push('/'))
   } catch(err) {
