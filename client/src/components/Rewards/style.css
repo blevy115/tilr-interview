@@ -1,12 +1,2 @@
 .rewards_gif img {
   margin: 1em; }
-
-.card-result { color:#3041B5;
-  font-size: 48px;
-  font-family: 'Signika', sans-serif;
-  padding-bottom: 10px;
-  border-style:solid ;
-  border-color:green;
-  border-radius: 30px;
-  padding-left:20px;
-}

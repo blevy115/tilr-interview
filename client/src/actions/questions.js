@@ -54,7 +54,7 @@ export const createUser = (name, password) => async (dispatch) => {
 export const fetchUsers = () => async (dispatch) => {
   try {
     const { data } = await axios.get('/users')
-    dispatch({ type: actionTypes.USERS_FETCH_ALL, payload: data.reverse() })
+    dispatch({ type: actionTypes.USERS_FETCH_ALL, payload: data })
   } catch (err) {
     console.log(err)
   }
